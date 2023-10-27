@@ -6,6 +6,8 @@ class Profile(models.Model):  # Используйте отдельную мод
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # Связь с пользователем
     first_name = models.CharField('Имя', max_length=255)
     last_name = models.CharField('Фамилия', max_length=255)
+    phone = models.DecimalField('Номер Тел:', max_digits=18, decimal_places=10)
+    email = models.EmailField('Электронная почта')
     photo = models.ImageField('Аватар', upload_to='photo/')  # Удалите начальную точку
     created = models.DateTimeField(auto_now_add=True)
 

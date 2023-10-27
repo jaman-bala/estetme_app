@@ -5,7 +5,7 @@ from account.models import Profile
 
 
 class Panel(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    participants = models.ManyToManyField(Profile)
     title = models.CharField('Тема задачи', max_length=500)
     descriptions = models.TextField('Опишите вопрос')
     file = models.FileField('Вложение файла', upload_to='./src/file/')
