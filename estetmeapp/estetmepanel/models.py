@@ -1,15 +1,16 @@
-from django.contrib.auth.models import User
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from account.models import Profile
+
 
 class Panel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField('Тема задачи', max_length=500)
     descriptions = models.TextField('Опишите вопрос')
     file = models.FileField('Вложение файла', upload_to='./src/file/')
     date = models.DateTimeField('Дата публикации')
-    created = models.DateTimeField(verbose_name="Срок задачи", auto_now_add=True)
+    created = models.DateField(verbose_name="Срок задачи")
     is_complete = models.BooleanField('Завершено', default=False)
 
     class Meta:
@@ -22,7 +23,7 @@ class Panel(models.Model):
 
 class Comment(models.Model):
     comments = RichTextUploadingField('Комментарии')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     panel = models.ForeignKey(Panel, on_delete=models.CASCADE)
 
     class Meta:

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #APP
     'estetmepanel',
+    'account',
 
     # Dependencies
     'ckeditor',
