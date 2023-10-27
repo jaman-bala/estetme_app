@@ -45,30 +45,29 @@
                 </li>
             </ul>
             <button type="button" class="ui blue button">Primary</button>
-            <div>
-            <!-- User -->
-              {% if user.is_authenticated %}
-          <div class="dropdown p-3 ml-auto">
-            <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              <img src="{{ user.profile.photo.url }}" class="rounded-circle" height="45" width="45" alt="" loading="lazy" />
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">My profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-          </div>
-        {% else %}
-          <a href="{% url 'login' %}" class="text-white ml-auto">Login</a>
-        {% endif %}
-        </div>
-        <!-- Collapsible wrapper -->
+
+                    <!-- User -->
+            {% if user.is_authenticated %}
+  <div class="ml-auto">
+    <div class="dropdown p-3">
+      <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+        <img src="{{ user.profile.photo.url }}" class="rounded-circle ml-5" height="45" width="45" alt="" loading="lazy" />
+      </a>
+      <p class="text-white ml-0 mb-0">{{ user.profile.first_name }} {{ user.profile.last_name }}</p>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+        <li><a class="dropdown-item" href="#">My profile</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+      </ul>
     </div>
+  </div>
+{% else %}
+  <a href="{% url 'login' %}" class="btn btn-outline-light ml-auto">Login</a>
+{% endif %}
+
 
     <!-- Container wrapper -->
-</nav>
-<!-- Navbar -->
-
+    </nav>
 </head>
 <body>
 
