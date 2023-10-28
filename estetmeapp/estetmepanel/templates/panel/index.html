@@ -37,7 +37,7 @@
                             <th>
                                 <img src="{{ user.profile.photo.url }}"
                                      class="shadow-1-strong rounded-circle" alt="avatar 1"
-                                     style="width: 55px; height: auto;">
+                                     style="width: 55px; height: 45;">
                                 <span class="ms-2">{{user.profile.first_name}} {{user.profile.last_name}}</span>
                             </th>
                             <td class="align-middle">
@@ -54,10 +54,13 @@
                             </td>
                             <td><p class="ui clue text"> {{ todo.created }}</p></td>
                             <td>
-                                <img src="{{ user.profile.photo.url }}"
+                                {% for participant in todo.participants.all %}
+                                <img src="{{ participant.user.profile.photo.url }}"
                                      class="shadow-1-strong rounded-circle" alt="avatar 1"
-                                     style="width: 55px; height: auto;">
+                                     style="width: 35px; height: 35;">
+                                {% endfor %}
                             </td>
+
                             <td>
                                 <a class="ui blue button" data-toggle="tooltip" title="" data-original-title="Edit"><i
                                         class="fas fa-pencil-alt"></i></a>
