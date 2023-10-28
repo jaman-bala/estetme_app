@@ -1,0 +1,19 @@
+{% extends 'panel/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="task-title" class="col-form-label">Название задачи:</label>
+      <input type="text" class="form-control" id="task-title">
+    </div>
+    <div class="form-group">
+      <label for="task-description" class="col-form-label">Описание:</label>
+      <textarea class="form-control" id="task-description"></textarea>
+    </div>
+  </form>
+</div>
+
+
+{% endblock content %}

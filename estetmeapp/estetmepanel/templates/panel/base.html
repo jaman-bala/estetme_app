@@ -7,66 +7,73 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>Salam aleykum</title>
+    <title>{% block title %}ESTETME{% endblock %}</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="{% static 'src/css/style.css' %}">
 
+</head>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <!-- Container wrapper -->
+        <div class="container">
+            <a class="navbar-brand text mb-1">ESTETME</a>
+
+            <!-- Toggle button -->
+            <button class="navbar-toggler text-white" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Главная</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+
+                <ul class="navbar-nav d-flex flex-row">
+
+                    <!-- Icon dropdown -->
+                    <li class="nav-item me-3 me-lg-0 dropdown">
+
+                    </li>
+                </ul>
+                <button type="button" class="ui blue button">Создать задачу</button>
+                <!-- User -->
+                {% if user.is_authenticated %}
+                <div class="ml-auto">
+                    <div class="dropdown p-3">
+                        <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                           id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ user.profile.photo.url }}"
+                                     class="shadow-1-strong rounded-circle ml-4" alt="avatar 1"
+                                     style="width: 55px; height: 45;">
+                        </a>
+                        <p class="text-white ml-0 mb-0">{{ user.profile.first_name }} {{ user.profile.last_name }}</p>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">My profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="{% url 'sign_in' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'sign_in' %}" class="btn btn-outline-light ml-auto">Login</a>
+                {% endif %}
 
 
-  <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <!-- Container wrapper -->
-    <div class="container">
-        <a class="navbar-brand text mb-1">ESTETME</a>
-
-        <!-- Toggle button -->
-        <button class="navbar-toggler text-white" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Главная</a>
-                </li>
-            </ul>
-            <!-- Left links -->
-
-            <ul class="navbar-nav d-flex flex-row">
-
-                <!-- Icon dropdown -->
-                <li class="nav-item me-3 me-lg-0 dropdown">
-
-                </li>
-            </ul>
-            <button type="button" class="ui blue button">Создать задачу</button>
-
-                    <!-- User -->
-            {% if user.is_authenticated %}
-  <div class="ml-auto">
-    <div class="dropdown p-3">
-      <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-        <img src="{{ user.profile.photo.url }}" class="rounded-circle ml-5" height="45" width="45" alt="" loading="lazy" />
-      </a>
-      <p class="text-white ml-0 mb-0">{{ user.profile.first_name }} {{ user.profile.last_name }}</p>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-        <li><a class="dropdown-item" href="#">My profile</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-{% else %}
-  <a href="{% url 'login' %}" class="btn btn-outline-light ml-auto">Login</a>
-{% endif %}
-
-
-    <!-- Container wrapper -->
+                <!-- Container wrapper -->
+            </div>
+        </div>
     </nav>
 </head>
 <body>
@@ -76,7 +83,7 @@
 {% endblock content %}
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 <!--    <script src="{% static 'src/js/style.js' %}"></script>-->
 </body>
 </html>

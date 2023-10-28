@@ -9,7 +9,7 @@ class Panel(models.Model):
     title = models.CharField('Тема задачи', max_length=500)
     descriptions = models.TextField('Опишите вопрос')
     file = models.FileField('Вложение файла', upload_to='./src/file/')
-    date = models.DateTimeField('Дата публикации')
+    date = models.DateTimeField('Дата публикации', auto_now=True)
     created = models.DateField(verbose_name="Срок задачи")
     is_complete = models.BooleanField('Завершено', default=False)
 

@@ -2,24 +2,81 @@
 {% load static %}
 {% block content %}
 
-<div style="margin-top: 50px;" class="ui container">
-{% for todo in todo_list %}
-<div class="ui segment">
-    <p class="ui big header"><img
-        src="{% static './src/images/icons8-заголовок-50.png' %}"
-        > {{ todo.title }}</p>
+<div class="container mt-5">
+    <div class="col-md-12 col-12 col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Задачи</h4>
+            </div>
+            <div class="card-body">
 
-    {% if todo.is_complete == False %}
-    <span class="ui gray label">Не завершено</span>
-    <a class="ui primary basic button" href="{% url 'update' todo_id=todo.id %}">Закрыть</a>
-    {% else %}
-    <span class="ui green label">Завершено</span>
-    <a class="ui blue button" href="{% url 'update' todo_id=todo.id %}">Открыть</a>
-    {% endif %}
-    <a class="ui negative basic button" href="{% url 'delete' todo_id=todo.id %}">Удалить</a>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+
+                        <tbody>
+                        <tr>
+                            <th class="text-center">
+                                <div>
+                                    <p>№</p>
+                                </div>
+                            </th>
+                            <th>Организатор</th>
+                            <th>Название задачи</th>
+                            <th>Статус</th>
+                            <th>Срок до:</th>
+                            <th>Участники</th>
+                            <th>Действие</th>
+                        </tr>
+                        {% for todo in todo_list %}
+                        <tr>
+                            <td class="p-0 text-center">
+                                <div class="mt-4">
+                                    <p>{{ todo.id }}</p>
+                                </div>
+                            </td>
+                            <th>
+                                <img src="{{ user.profile.photo.url }}"
+                                     class="shadow-1-strong rounded-circle" alt="avatar 1"
+                                     style="width: 55px; height: auto;">
+                                <span class="ms-2">{{user.profile.first_name}} {{user.profile.last_name}}</span>
+                            </th>
+                            <td class="align-middle">
+                                <span>{{ todo.title }}</span>
+                            </td>
+                            <td class="align-middle">
+                                {% if todo.is_complete == False %}
+                                <span class="ui black label">Не завершено</span>
+                                <a class="ui primary basic button" href="{% url 'update' todo_id=todo.id %}">Закрыть</a>
+                                {% else %}
+                                <span class="ui green label">Завершено</span>
+                                <a class="ui blue button" href="{% url 'update' todo_id=todo.id %}">Открыть</a>
+                                {% endif %}
+                            </td>
+                            <td><p class="ui clue text"> {{ todo.created }}</p></td>
+                            <td>
+                                <img src="{{ user.profile.photo.url }}"
+                                     class="shadow-1-strong rounded-circle" alt="avatar 1"
+                                     style="width: 55px; height: auto;">
+                            </td>
+                            <td>
+                                <a class="ui blue button" data-toggle="tooltip" title="" data-original-title="Edit"><i
+                                        class="fas fa-pencil-alt"></i></a>
+                                <a class="ui blue button" data-toggle="tooltip" title=""
+                                   href="{% url 'delete' todo_id=todo.id %}"
+                                   data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
+                                   data-confirm-yes="alert('Deleted')" data-original-title="Delete"><i
+                                        class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-{% endfor %}
-</div>
 
 {% endblock content %}

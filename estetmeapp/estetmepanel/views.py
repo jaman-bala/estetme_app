@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
+
 
 from .models import Panel
 from .forms import CreateForm
 
 
+@login_required
 def index(request):
     todos = Panel.objects.all()
     return render(request, 'panel/index.html', {'todo_list': todos})
@@ -26,7 +29,7 @@ def add(request):
             'form': form,
             'error': error
         }
-    return render(request, 'panel/index.html')
+    return render(request, 'panel/index.html', {"data": data})
 
 
 def update(request, todo_id):
