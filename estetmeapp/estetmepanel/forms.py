@@ -1,30 +1,33 @@
 from .models import Panel
-from django.forms import ModelForm, TextInput, Textarea, FileInput, DateInput
+from django.forms import ModelForm, TextInput, Textarea, FileInput, DateInput, SelectMultiple
 
 
 class CreateForm(ModelForm):
     class Meta:
         model = Panel
-        fields = ['title', 'descriptions', 'file', 'created']
+        fields = ['title', 'descriptions', 'file', 'created', 'participants']
 
         widgets = {
             "title": TextInput(attrs={
 
-                'placeholder': 'Тема задачи'
+                'placeholder': 'Введите тему'
             }),
 
             "descriptions": Textarea(attrs={
 
-                'placeholder': 'Введите свой вопрос'
+                'placeholder': 'Введите своё описание'
             }),
 
             "file": FileInput(attrs={
 
                 'placeholder': 'Файл'
             }),
-            "created": DateInput(attrs={
+            'created': DateInput(format='%Y-%m-%d', attrs={
+                'type': 'date'
+            }),
 
-                'placeholder': 'Срок задачи'
+            'participants': SelectMultiple(attrs={
+                'placeholder': 'Список участников'
             }),
 
         }

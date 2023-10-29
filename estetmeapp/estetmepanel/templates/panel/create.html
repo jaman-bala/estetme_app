@@ -2,18 +2,51 @@
 {% load static %}
 {% block content %}
 
-<div class="modal-body">
-  <form>
-    <div class="form-group">
-      <label for="task-title" class="col-form-label">Название задачи:</label>
-      <input type="text" class="form-control" id="task-title">
+<div class="container py-5 vh-100">
+    <div class="card" style="width: 100%">
+        <div class="card-header" style="width: 100%">
+            <h4>Создать задачу</h4>
+        </div>
+        <div class="container__forms">
+            <div class="card-body">
+
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="col-25">
+                            <label>Тема задачи</label>
+                        </div>
+
+                        <div class="col-75">
+                            {{ form.title}}
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-25">
+                            <label>Описание</label>
+                        </div>
+                        {{ form.descriptions}}
+                    </div>
+                    <div class="col-25">
+                        <label>Вложите файл</label>
+                    </div>
+                    {{ form.file}}
+                    <div class="col-25">
+                        <label>Срок задачи</label>
+                    </div>
+                    {{ form.created}}
+
+                    <div>
+                        <input type="submit" value="Отправить">
+                    </div>
+
+                    <select class="form-control form-control-lg">
+                        <option>{{ form.participants }}</option>
+                    </select>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-      <label for="task-description" class="col-form-label">Описание:</label>
-      <textarea class="form-control" id="task-description"></textarea>
-    </div>
-  </form>
 </div>
-
-
 {% endblock content %}

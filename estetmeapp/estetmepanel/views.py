@@ -1,6 +1,4 @@
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 
@@ -14,8 +12,7 @@ def index(request):
     return render(request, 'panel/index.html', {'todo_list': todos})
 
 
-@require_http_methods(['POST'])
-@csrf_exempt
+@login_required
 def add(request):
     if request.method == 'POST':
         form = CreateForm(request.POST, request.FILES)
@@ -23,15 +20,11 @@ def add(request):
             form.save()
             return redirect('index')
     else:
-        error = 'Формат был неверной'
         form = CreateForm()
-        data = {
-            'form': form,
-            'error': error
-        }
-    return render(request, 'panel/index.html', {"data": data})
+    return render(request, 'panel/create.html', {"form": form})
 
 
+@login_required
 def update(request, todo_id):
     todo = Panel.objects.get(id=todo_id)
     todo.is_complete = not todo.is_complete
@@ -39,6 +32,20 @@ def update(request, todo_id):
     return redirect('index')
 
 
+@login_required
+def edit(request, todo_id):
+    todo = get_object_or_404(Panel, id=todo_id)
+    if request.method == 'POST':
+        form = CreateForm(request.POST, request.FILES, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = CreateForm(instance=todo)
+    return render(request, 'panel/create.html', {"form": form} )
+
+
+@login_required
 def delete(request, todo_id):
     todo = Panel.objects.get(id=todo_id)
     todo.delete()

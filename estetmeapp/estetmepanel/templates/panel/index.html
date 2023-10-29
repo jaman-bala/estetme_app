@@ -2,16 +2,18 @@
 {% load static %}
 {% block content %}
 
-<div class="container mt-5">
-    <div class="col-md-12 col-12 col-sm-12">
-        <div class="card">
-            <div class="card-header">
+
+<section class="vh-100" style="background-color: #eee;">
+<div class="container py-5 vh-100">
+    <div style="width: 100%">
+        <div class="card" style="width: 100%">
+            <div class="card-header" style="width: 100%">
                 <h4>Задачи</h4>
             </div>
             <div class="card-body">
 
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped mb-0">
 
                         <tbody>
                         <tr>
@@ -20,12 +22,12 @@
                                     <p>№</p>
                                 </div>
                             </th>
-                            <th>Организатор</th>
-                            <th>Название задачи</th>
-                            <th>Статус</th>
+                            <th style="width: 25%">Организатор</th>
+                            <th style="width: 25%">Название задачи</th>
+                            <th style="width: 30%">Статус</th>
                             <th>Срок до:</th>
                             <th>Участники</th>
-                            <th>Действие</th>
+                            <th style="width: 30%">Действие</th>
                         </tr>
                         {% for todo in todo_list %}
                         <tr>
@@ -46,10 +48,10 @@
                             <td class="align-middle">
                                 {% if todo.is_complete == False %}
                                 <span class="ui black label">Не завершено</span>
-                                <a class="ui primary basic button" href="{% url 'update' todo_id=todo.id %}">Закрыть</a>
+                                <a class="ui red  button" href="{% url 'update' todo_id=todo.id %}">Закрыть</a>
                                 {% else %}
                                 <span class="ui green label">Завершено</span>
-                                <a class="ui blue button" href="{% url 'update' todo_id=todo.id %}">Открыть</a>
+                                <a class="ui blue basic button" href="{% url 'update' todo_id=todo.id %}">Открыть</a>
                                 {% endif %}
                             </td>
                             <td><p class="ui clue text"> {{ todo.created }}</p></td>
@@ -62,9 +64,11 @@
                             </td>
 
                             <td>
-                                <a class="ui blue button" data-toggle="tooltip" title="" data-original-title="Edit"><i
+                                <a class="ui blue button" data-toggle="tooltip"
+                                   href="{% url 'edit' todo_id=todo.id %}"
+                                   data-original-title="Edit"><i
                                         class="fas fa-pencil-alt"></i></a>
-                                <a class="ui blue button" data-toggle="tooltip" title=""
+                                <a class="ui blue button" data-toggle="tooltip"
                                    href="{% url 'delete' todo_id=todo.id %}"
                                    data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
                                    data-confirm-yes="alert('Deleted')" data-original-title="Delete"><i
@@ -80,6 +84,6 @@
         </div>
     </div>
 </div>
-
+</section>
 
 {% endblock content %}

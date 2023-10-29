@@ -6,7 +6,7 @@ from account.models import Profile
 
 class Panel(models.Model):
     participants = models.ManyToManyField(Profile)
-    title = models.CharField('Тема задачи', max_length=500)
+    title = models.CharField('Тема задачи', max_length=35)
     descriptions = models.TextField('Опишите вопрос')
     file = models.FileField('Вложение файла', upload_to='./src/file/')
     date = models.DateTimeField('Дата публикации', auto_now=True)
